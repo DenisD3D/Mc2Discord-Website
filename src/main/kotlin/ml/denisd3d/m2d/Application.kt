@@ -23,14 +23,14 @@ import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
 //DISCORD
-val SERVER_ID = Snowflake(env("SERVER_ID")?.toLong() ?: error("Env var TEST_SERVER not provided"))
 private val TOKEN = env("TOKEN") ?: error("Env var TOKEN not provided")
+val SERVER_ID = Snowflake(env("SERVER_ID")?.toLong() ?: error("Env var SERVER_ID not provided"))
 
 @OptIn(ExperimentalTime::class)
 suspend fun main() {
     CurseAPIMinecraft.initialize()
 
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
+    embeddedServer(Netty) {
         install(FreeMarker) {
             templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
             outputFormat = HTMLOutputFormat.INSTANCE
