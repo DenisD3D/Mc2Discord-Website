@@ -87,3 +87,9 @@ tasks.register<Copy>("copyToLib") {
 tasks.build {
     dependsOn(tasks["copyToLib"])
 }
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = application.mainClass
+    }
+}
