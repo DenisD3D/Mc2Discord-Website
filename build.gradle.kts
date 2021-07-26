@@ -78,3 +78,12 @@ java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
+
+tasks.register<Copy>("copyToLib") {
+    from(configurations.runtimeClasspath)
+    into("$buildDir/libs")
+}
+
+tasks.build {
+    dependsOn(tasks["copyToLib"])
+}
