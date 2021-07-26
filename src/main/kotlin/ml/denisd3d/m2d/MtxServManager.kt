@@ -43,14 +43,14 @@ suspend fun getAccessToken() {
 }
 
 suspend fun startServer() {
-    val response: HttpResponse = client.get<HttpStatement>(startServerUrl) {
+    client.get<HttpStatement>(startServerUrl) {
         method = HttpMethod.Post
         parameter("access_token", tokenResponse?.access_token)
     }.execute()
 }
 
 suspend fun stopServer() {
-    val response: HttpResponse = client.get<HttpStatement>(stopServerUrl) {
+    client.get<HttpStatement>(stopServerUrl) {
         method = HttpMethod.Post
         parameter("access_token", tokenResponse?.access_token)
     }.execute()

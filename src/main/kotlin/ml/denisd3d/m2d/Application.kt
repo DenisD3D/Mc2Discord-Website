@@ -37,7 +37,7 @@ suspend fun main() {
         }
         install(IgnoreTrailingSlash)
         install(StatusPages) {
-            exception<MissingRequestParameterException> { cause ->
+            exception<MissingRequestParameterException> { _ ->
                 call.respond(HttpStatusCode.BadRequest)
             }
         }

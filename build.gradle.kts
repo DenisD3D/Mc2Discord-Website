@@ -64,6 +64,9 @@ dependencies {
     api("com.github.TheRandomLabs:CurseAPI:master-SNAPSHOT")
     api("com.github.TheRandomLabs:CurseAPI-Minecraft:master-SNAPSHOT")
 
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
+
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
 }
@@ -79,13 +82,13 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-tasks.register<Copy>("copyToLib") {
-    from(configurations.runtimeClasspath)
-    into("$buildDir/libs")
+tasks.register<Jar>("fatJar") {
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+    with(tasks.jar.get() as CopySpec)
 }
 
 tasks.build {
-    dependsOn(tasks["copyToLib"])
+    dependsOn(tasks["fatJar"])
 }
 
 tasks.withType<Jar> {
