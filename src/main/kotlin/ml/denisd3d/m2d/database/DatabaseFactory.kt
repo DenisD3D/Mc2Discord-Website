@@ -21,12 +21,16 @@ object DatabaseFactory {
      * */
     private fun hikari(): HikariDataSource {
         val config = HikariConfig()
-        config.dataSourceClassName = "org.postgresql.ds.PGSimpleDataSource"
-        config.username = env("DB_USERNAME")?: error("Invalid DB settings")
-        config.password = env("DB_PASSWORD")?: error("Invalid DB settings")
-        config.addDataSourceProperty("databaseName", env("DB_NAME")?: error("Invalid DB settings"))
-        config.addDataSourceProperty("portNumber", env("DB_PORT")?: error("Invalid DB settings"))
-        config.addDataSourceProperty("serverName", env("DB_SERVER")?: error("Invalid DB settings"))
+        if (env("DATABASE_URL") != null) {
+            config.jdbcUrl
+        } else {
+            config.dataSourceClassName = "org.postgresql.ds.PGSimpleDataSource"
+            config.username = env("DB_USERNAME") ?: error("Invalid DB settings")
+            config.password = env("DB_PASSWORD") ?: error("Invalid DB settings")
+            config.addDataSourceProperty("databaseName", env("DB_NAME") ?: error("Invalid DB settings"))
+            config.addDataSourceProperty("portNumber", env("DB_PORT") ?: error("Invalid DB settings"))
+            config.addDataSourceProperty("serverName", env("DB_SERVER") ?: error("Invalid DB settings"))
+        }
 
         return HikariDataSource(config)
     }
