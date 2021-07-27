@@ -5,6 +5,7 @@ import com.kotlindiscord.kord.extensions.extensions.Extension
 import com.kotlindiscord.kord.extensions.utils.env
 import dev.kord.common.annotation.KordPreview
 import dev.kord.core.event.gateway.ReadyEvent
+import dev.kord.core.event.message.MessageCreateEvent
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.*
@@ -24,9 +25,14 @@ class ServerExtension : Extension() {
     override suspend fun setup() {
         event<ReadyEvent> {
             action {
+                getAccessToken()
 
                 println("Discord logged in started")
-                getAccessToken()
+            }
+        }
+        event<MessageCreateEvent> {
+            action {
+                println(event.message)
             }
         }
 

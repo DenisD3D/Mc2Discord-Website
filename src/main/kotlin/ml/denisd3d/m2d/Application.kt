@@ -64,7 +64,5 @@ suspend fun main() {
     }
 
     bot.start()
-
-    println("Started")
 }
 
