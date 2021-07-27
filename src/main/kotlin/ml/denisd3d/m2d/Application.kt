@@ -18,7 +18,6 @@ import ml.denisd3d.m2d.database.DatabaseFactory
 import ml.denisd3d.m2d.discord.extensions.LinkExtension
 import ml.denisd3d.m2d.discord.extensions.ServerExtension
 import ml.denisd3d.m2d.plugins.configureRouting
-import org.slf4j.event.Level
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
@@ -30,7 +29,7 @@ val SERVER_ID = Snowflake(env("SERVER_ID")?.toLong() ?: error("Env var SERVER_ID
 suspend fun main() {
     CurseAPIMinecraft.initialize()
 
-    embeddedServer(Netty) {
+    embeddedServer(Netty, Integer.valueOf(env("PORT") ?: "80")) {
         install(FreeMarker) {
             templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
             outputFormat = HTMLOutputFormat.INSTANCE
