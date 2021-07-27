@@ -23,7 +23,7 @@ object DatabaseFactory {
         val config = HikariConfig()
         config.dataSourceClassName = "org.postgresql.ds.PGSimpleDataSource"
         if (env("DATABASE_URL") != null) {
-            config.jdbcUrl = env("JDBC_DATABASE_URL")
+            config.jdbcUrl = env("JDBC_DATABASE_URL")?.replace("&sslmode=require", "")
         } else {
             config.username = env("DB_USERNAME") ?: error("Invalid DB settings")
             config.password = env("DB_PASSWORD") ?: error("Invalid DB settings")
