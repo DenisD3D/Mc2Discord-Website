@@ -21,10 +21,10 @@ object DatabaseFactory {
      * */
     private fun hikari(): HikariDataSource {
         val config = HikariConfig()
+        config.dataSourceClassName = "org.postgresql.ds.PGSimpleDataSource"
         if (env("DATABASE_URL") != null) {
-            config.jdbcUrl = env("DATABASE_URL")
+            config.jdbcUrl = env("JDBC_DATABASE_URL")
         } else {
-            config.dataSourceClassName = "org.postgresql.ds.PGSimpleDataSource"
             config.username = env("DB_USERNAME") ?: error("Invalid DB settings")
             config.password = env("DB_PASSWORD") ?: error("Invalid DB settings")
             config.addDataSourceProperty("databaseName", env("DB_NAME") ?: error("Invalid DB settings"))
