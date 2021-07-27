@@ -20,6 +20,9 @@ val stopServerUrl = "https://mtxserv.com/api/v1/game/${MTXSERV_GAME_SERVER_ID}/a
 
 var tokenResponse: TokenResponse? = null
 
+var current_time: Long = 0
+
+
 val client = HttpClient(CIO) {
     install(Logging) {
         logger = Logger.DEFAULT
@@ -33,7 +36,8 @@ val client = HttpClient(CIO) {
 data class TokenResponse(val access_token: String, val expires_in: Long, val token_type: String, val scope: String, val refresh_token: String, )
 
 suspend fun getAccessToken() {
-     tokenResponse = client.get<HttpStatement>(oauthTokenUrl) {
+    current_time = System.currentTimeMillis()
+    tokenResponse = client.get<HttpStatement>(oauthTokenUrl) {
         method = HttpMethod.Get
         parameter("grant_type", "https://mtxserv.com/grants/api_key")
         parameter("client_id", MTXSERV_CLIENT_ID)
@@ -43,6 +47,8 @@ suspend fun getAccessToken() {
 }
 
 suspend fun startServer() {
+    if (current_time + 3400 * 1000 < System.currentTimeMillis())
+        getAccessToken()
     client.get<HttpStatement>(startServerUrl) {
         method = HttpMethod.Post
         parameter("access_token", tokenResponse?.access_token)
@@ -50,6 +56,8 @@ suspend fun startServer() {
 }
 
 suspend fun stopServer() {
+    if (current_time + 3400 * 1000 < System.currentTimeMillis())
+        getAccessToken()
     client.get<HttpStatement>(stopServerUrl) {
         method = HttpMethod.Post
         parameter("access_token", tokenResponse?.access_token)
