@@ -2,20 +2,12 @@ package ml.denisd3d.m2d.discord.extensions
 
 import com.kotlindiscord.kord.extensions.commands.slash.AutoAckType
 import com.kotlindiscord.kord.extensions.extensions.Extension
-import com.kotlindiscord.kord.extensions.utils.env
 import dev.kord.common.annotation.KordPreview
 import dev.kord.core.event.gateway.ReadyEvent
-import dev.kord.core.event.message.MessageCreateEvent
-import io.ktor.client.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
-import io.ktor.client.features.logging.*
-import io.ktor.client.request.*
-import io.ktor.client.response.*
-import io.ktor.client.statement.*
-import io.ktor.client.statement.HttpResponse
-import io.ktor.http.*
-import ml.denisd3d.m2d.*
+import ml.denisd3d.m2d.SERVER_ID
+import ml.denisd3d.m2d.getAccessToken
+import ml.denisd3d.m2d.startServer
+import ml.denisd3d.m2d.stopServer
 
 class ServerExtension : Extension() {
     override val name = "server"
@@ -26,13 +18,6 @@ class ServerExtension : Extension() {
         event<ReadyEvent> {
             action {
                 getAccessToken()
-
-                println("Discord logged in started")
-            }
-        }
-        event<MessageCreateEvent> {
-            action {
-                println(event.message)
             }
         }
 
