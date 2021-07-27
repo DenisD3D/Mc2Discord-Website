@@ -24,6 +24,8 @@ class ServerExtension : Extension() {
     override suspend fun setup() {
         event<ReadyEvent> {
             action {
+
+                println("Discord logged in started")
                 getAccessToken()
             }
         }

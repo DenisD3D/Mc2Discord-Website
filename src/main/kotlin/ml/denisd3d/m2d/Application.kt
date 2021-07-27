@@ -29,6 +29,7 @@ val SERVER_ID = Snowflake(env("SERVER_ID")?.toLong() ?: error("Env var SERVER_ID
 suspend fun main() {
     CurseAPIMinecraft.initialize()
 
+    println("Starting ktor")
     embeddedServer(Netty, Integer.valueOf(env("PORT") ?: "80")) {
         install(FreeMarker) {
             templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
@@ -45,6 +46,9 @@ suspend fun main() {
         configureRouting()
     }.start(wait = false)
 
+
+    println("Starting discord")
+
     val bot = ExtensibleBot(TOKEN) {
         slashCommands {
             enabled = true
@@ -60,5 +64,7 @@ suspend fun main() {
     }
 
     bot.start()
+
+    println("Started")
 }
 
