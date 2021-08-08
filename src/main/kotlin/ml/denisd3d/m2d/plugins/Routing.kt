@@ -48,6 +48,9 @@ fun Application.configureRouting() {
             val upload = uploadRepo.getOrFail(call.parameters.getOrFail("key"))
             call.respond(FreeMarkerContent("uploads/view.ftl", mapOf("upload" to upload), ""))
         }
+        get("/ping"){
+            call.respond("pong")
+        }
         static("/static") {
             resources("static")
         }

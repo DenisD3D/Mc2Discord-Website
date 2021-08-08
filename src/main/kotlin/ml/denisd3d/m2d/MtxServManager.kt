@@ -22,17 +22,6 @@ var tokenResponse: TokenResponse? = null
 
 var current_time: Long = 0
 
-
-val client = HttpClient(CIO) {
-    install(Logging) {
-        logger = Logger.DEFAULT
-        level = LogLevel.NONE
-    }
-    install(JsonFeature) {
-        serializer = GsonSerializer()
-    }
-}
-
 data class TokenResponse(val access_token: String, val expires_in: Long, val token_type: String, val scope: String, val refresh_token: String, )
 
 suspend fun getAccessToken() {
