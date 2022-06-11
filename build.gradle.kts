@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "ml.denisd3d.m2d"
-version = "0.0.1"
+version = "0.0.2"
 
 application {
     mainClass.set("ml.denisd3d.m2d.ApplicationKt")
