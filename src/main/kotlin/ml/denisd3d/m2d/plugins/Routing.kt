@@ -1,7 +1,6 @@
 package ml.denisd3d.m2d.plugins
 
 import com.kotlindiscord.kord.extensions.utils.env
-import com.therandomlabs.curseapi.CurseAPI
 import io.ktor.application.*
 import io.ktor.freemarker.*
 import io.ktor.http.content.*
@@ -18,17 +17,17 @@ val uploadRepo = UploadRepo()
 fun Application.configureRouting() {
     // Starting point for a Ktor app:
     routing {
-        val files = CurseAPI.project(325235).get().files();
+//        val files = CurseAPI.project(325235).get().files();
         get("/") {
-            val versionMap = mutableMapOf<String, String>()
-            env("FORGE_VERSIONS")?.split(",")?.forEach { version ->
-                val filesCopy = files.clone()
-                val versions = version.split("/")
-                filesCopy.filter { curseFile -> curseFile.gameVersionStrings().contains(versions[0]) }
-                val curseVersion = filesCopy.maxByOrNull { curseFile -> curseFile.uploadTime() }
-                versionMap[versions[1]] = curseVersion?.url().toString()
-            }
-            call.respond(FreeMarkerContent("index.ftl", mapOf("versions" to versionMap), ""))
+//            val versionMap = mutableMapOf<String, String>()
+//            env("FORGE_VERSIONS")?.split(",")?.forEach { version ->
+//                val filesCopy = files.clone()
+//                val versions = version.split("/")
+//                filesCopy.filter { curseFile -> curseFile.gameVersionStrings().contains(versions[0]) }
+//                val curseVersion = filesCopy.maxByOrNull { curseFile -> curseFile.uploadTime() }
+//                versionMap[versions[1]] = curseVersion?.url().toString()
+//            }
+            call.respond(FreeMarkerContent("index.ftl", null, ""))
         }
         post("/api/v1/upload/") {
             val formParameters = call.receiveParameters()
@@ -57,4 +56,4 @@ fun Application.configureRouting() {
     }
 }
 
-open class ParameterException(message: String = "A parameter is missing") : Exception(message)
+//open class ParameterException(message: String = "A parameter is missing") : Exception(message)

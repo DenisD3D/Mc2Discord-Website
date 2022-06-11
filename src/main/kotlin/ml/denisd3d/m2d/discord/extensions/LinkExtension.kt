@@ -2,19 +2,9 @@ package ml.denisd3d.m2d.discord.extensions
 
 import com.kotlindiscord.kord.extensions.commands.slash.AutoAckType
 import com.kotlindiscord.kord.extensions.extensions.Extension
-import com.kotlindiscord.kord.extensions.utils.env
-import com.therandomlabs.curseapi.CurseAPI
 import dev.kord.common.annotation.KordPreview
-import dev.kord.common.entity.DiscordPartialEmoji
-import dev.kord.common.entity.Snowflake
-import dev.kord.core.entity.GuildEmoji
-import dev.kord.core.entity.ReactionEmoji
 import dev.kord.rest.builder.interaction.embed
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonObject
 import ml.denisd3d.m2d.SERVER_ID
-import java.net.URL
 
 class LinkExtension : Extension() {
     override val name = "link"
@@ -44,6 +34,10 @@ class LinkExtension : Extension() {
                             value = "https://www.curseforge.com/minecraft/mc-mods/mc2discord"
                         }
                         field {
+                            name = "Modrinth (Download):"
+                            value = "https://modrinth.com/mod/mc2discord"
+                        }
+                        field {
                             name = "Github (Source code) :"
                             value = "https://github.com/DenisD3D/Mc2Discord"
                         }
@@ -52,7 +46,7 @@ class LinkExtension : Extension() {
                             value = "https://github.com/DenisD3D/Mc2Discord/wiki"
                         }
                     }
-                    components {
+                    /*components {
                         val files = CurseAPI.project(325235).get().files();
                         env("FORGE_VERSIONS")?.split(",")?.forEach { version ->
                             val filesCopy = files.clone()
@@ -65,7 +59,7 @@ class LinkExtension : Extension() {
                                 url = curseVersion?.url().toString()
                             }
                         }
-                    }
+                    }*/
                 }
             }
         }

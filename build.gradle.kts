@@ -61,8 +61,8 @@ dependencies {
     implementation("com.zaxxer:HikariCP:3.4.2")
 
     implementation("com.kotlindiscord.kord.extensions:kord-extensions:$kordexVersion")
-    api("com.github.TheRandomLabs:CurseAPI:master-SNAPSHOT")
-    api("com.github.TheRandomLabs:CurseAPI-Minecraft:master-SNAPSHOT")
+//    api("com.github.TheRandomLabs:CurseAPI:master-SNAPSHOT")
+//    api("com.github.TheRandomLabs:CurseAPI-Minecraft:master-SNAPSHOT")
 
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")

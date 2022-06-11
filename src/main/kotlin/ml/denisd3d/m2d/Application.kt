@@ -2,7 +2,6 @@ package ml.denisd3d.m2d
 
 import com.kotlindiscord.kord.extensions.ExtensibleBot
 import com.kotlindiscord.kord.extensions.utils.env
-import com.therandomlabs.curseapi.minecraft.CurseAPIMinecraft
 import dev.kord.common.entity.Snowflake
 import freemarker.cache.ClassTemplateLoader
 import freemarker.core.HTMLOutputFormat
@@ -49,8 +48,6 @@ val client = HttpClient(CIO) {
 
 @OptIn(ExperimentalTime::class, kotlinx.coroutines.DelicateCoroutinesApi::class)
 suspend fun main() {
-    CurseAPIMinecraft.initialize()
-
     val fixedRateTimer = fixedRateTimer(name = "awake", daemon = true, initialDelay = TimeUnit.MINUTES.toMillis(1), period = TimeUnit.MINUTES.toMillis(20)) {
         GlobalScope.launch (Dispatchers.IO) {
             println(client.get<HttpStatement>(env("URL") + "/ping") {
