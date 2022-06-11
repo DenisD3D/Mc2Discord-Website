@@ -83,6 +83,7 @@ java {
 }
 
 tasks.register<Jar>("fatJar") {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     with(tasks.jar.get() as CopySpec)
 }
