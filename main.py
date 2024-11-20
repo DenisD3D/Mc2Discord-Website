@@ -14,6 +14,7 @@ load_dotenv()
 
 # Flask setup
 app = Flask(__name__, template_folder='templates')
+app.url_map.strict_slashes = False
 discord = DiscordInteractions(app)
 app.config["DISCORD_CLIENT_ID"] = os.getenv("DISCORD_CLIENT_ID")
 app.config["DISCORD_PUBLIC_KEY"] = os.getenv("DISCORD_PUBLIC_KEY")
@@ -121,9 +122,9 @@ def view():
     return render_template("view.html", id=result[0], config=result[1], errors=result[2], env=result[3])
 
 
+discord.set_route("/interactions")
+discord.update_commands(guild_id=os.environ["DISCORD_GUILD_ID"])
+
 # Entry point
 if __name__ == '__main__':
-    discord.set_route("/interactions")
-    discord.update_commands(guild_id=os.environ["DISCORD_GUILD_ID"])
-
     app.run(port=os.getenv('FLASK_PORT', 5000))

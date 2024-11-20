@@ -2,7 +2,7 @@
 
 ## Database structure
 ```postgresql
-CREATE TABLE upload (
+CREATE TABLE uploads (
     id     UUID NOT NULL PRIMARY KEY,
     config TEXT NOT NULL,
     errors TEXT NOT NULL,
