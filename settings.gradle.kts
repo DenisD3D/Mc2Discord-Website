@@ -1,1 +1,0 @@
-rootProject.name = "Mc2Discord - Bot - Website"

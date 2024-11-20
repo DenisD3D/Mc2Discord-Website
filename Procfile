@@ -1,1 +1,0 @@
-web: java -jar "build/libs/Mc2Discord - Bot - Website-0.0.2.jar"
