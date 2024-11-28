@@ -13,7 +13,7 @@ from mtxserv import MTXServClient
 load_dotenv()
 
 # Flask setup
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='')
 app.url_map.strict_slashes = False
 discord = DiscordInteractions(app)
 app.config["DISCORD_CLIENT_ID"] = os.getenv("DISCORD_CLIENT_ID")
